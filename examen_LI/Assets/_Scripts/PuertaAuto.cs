@@ -1,19 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PuertaAuto : MonoBehaviour
 {
-    public float elevacionspeed; 
+    
 
-  /*  private void OnTriggerEnter(Collider other)
+    [SerializeField] private GameObject puertaauto;
+    [SerializeField] private float elevacionspeed;
+    [SerializeField] private Rigidbody puertarb;
+    private float limitedeelevacion = 6f;
+
+    private void Start()
     {
-      (new transform(0f, elevacionspeed, 0f) * Time.deltaTime).gameObject(new Vector3 (0f, elevacionspeed, 0f)*Time.deltaTime);
-        Debug.Log("Se mueve la puerta");
+       
     }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == ("Player"))
+        {
+            
+            
+                Debug.Log("la puerta se eleva");
+                puertarb.useGravity = false;
+                puertaauto.transform.Translate(new Vector3(0f,limitedeelevacion,0f) * elevacionspeed * Time.deltaTime);
+
+            
+
+        }
+    }
+
+
     private void OnTriggerExit(Collider other)
     {
-        //other.gameObject.transform.Translate(new Vector3(0f, -elevacionspeed, 0f) * Time.deltaTime);
+        Debug.Log("la puerta se cierra");
+        puertarb.useGravity = true;
+        puertaauto.transform.Translate(Vector3.down * elevacionspeed* Time.deltaTime);
     }
-  */
+
 }
